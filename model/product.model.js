@@ -8,7 +8,7 @@ const productSchema = mongoose.Schema({
     items:{
         type:String,
     },
-    quntity:{
+    quantity:{
         type:Number,
     },
     rating:{

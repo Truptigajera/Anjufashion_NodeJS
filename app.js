@@ -4,8 +4,9 @@ const mongoose=require("mongoose");
 const morgan = require("morgan");
 const userRoutes = require('./routes/user.routes')
 const productRoutes = require('./routes/product.routes');
-// const orderRoutes = require('./routes/order.routes');
+const orderRoutes = require('./routes/order.routes');
 const router = require('./routes/cart.routes');
+const reviewRoutes = require('./routes/review.routes')
 
 
 
@@ -23,8 +24,9 @@ app.use( express.static('images'));
 //register the user routes
 app.use("/api/users",userRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/carts",router)
-// app.use("/api/orders",orderRoutes)
+app.use("/api/carts",router);
+app.use("/api/orders",orderRoutes);
+app.use("/api/reviews",reviewRoutes);
 
 
 app.get("/",(req,res)=>{
