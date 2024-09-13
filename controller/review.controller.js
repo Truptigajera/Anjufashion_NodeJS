@@ -3,23 +3,28 @@ const Review = require('../model/review.model');
 exports.createreview = async (req, res) => {
 
     try {
-        const { productId, rating, comment } = req.body;
-        const userId = req.user._id;
-        const review = Review.create({ userId, productId, rating, comment });
-        res.status(201).json({ message: 'Review create successfully...', review });
+        let review = await Review.findOne({
+            user:req.user._id,
+            productId:req.body.productId,
+            isDelete:false,
+        });
+        // const { productId, rating, comment } = req.body;
+        // const userId = req.user._id;
+         review = await Review.create({user:req.user._id,...req.body });
+        // console.log(review);
+        
+        res.status(201).json({ message: 'Review create successfully...,',review});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error...' });
     }
-
 };
-
 
 exports.getproductreviews = async (req, res) => {
 
     try {
-        const { productId } = req.query;
-        const reviews = await Review.find({ productId, isDelete: false }).populate('userId', 'name');
+        // const { productId } = req.query;
+        const reviews = await Review.find(req.query,req.user._id).populate('userId', 'name');
         res.status(200).json(reviews);
     } catch (error) {
         console.log(error);

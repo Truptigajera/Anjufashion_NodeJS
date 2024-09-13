@@ -7,6 +7,7 @@ const productRoutes = require('./routes/product.routes');
 const orderRoutes = require('./routes/order.routes');
 const router = require('./routes/cart.routes');
 const reviewRoutes = require('./routes/review.routes')
+const favoriteRoutes = require('./routes/wishlist.routes')
 
 
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded ({extended:false}));
 app.use( express.static('images'));
 
+
 // app.set("view engine",'ejs');
 
 //register the user routes
@@ -27,6 +29,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/carts",router);
 app.use("/api/orders",orderRoutes);
 app.use("/api/reviews",reviewRoutes);
+app.use("/api/fav",favoriteRoutes);
 
 
 app.get("/",(req,res)=>{
